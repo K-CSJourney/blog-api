@@ -8,7 +8,7 @@ const logout = async (req: Request, res: Response): Promise<void> => {
     if (refreshToken) {
       await Token.deleteOne({ token: refreshToken });
 
-      logger.info('User refresh token deleted sunccessfully', {
+      logger.info('User refresh token deleted successfully', {
         userId: req.userId,
         token: refreshToken,
       });
@@ -20,7 +20,7 @@ const logout = async (req: Request, res: Response): Promise<void> => {
       sameSite: 'strict',
     });
 
-    res.status(204);
+    res.status(204).end();
 
     logger.info('User logged out successfully', { userId: req.userId });
   } catch (error) {

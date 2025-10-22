@@ -12,7 +12,7 @@ export const generateAccessToken = (userId: Types.ObjectId): string => {
 export const generateRefreshToken = (userId: Types.ObjectId): string => {
   return jwt.sign({ userId }, config.JWT_REFRESH_SECRET, {
     expiresIn: config.REFRESH_TOKEN_EXPIRY,
-    subject: 'resfreshToken',
+    subject: 'refreshToken',
   });
 };
 

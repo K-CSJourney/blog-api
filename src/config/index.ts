@@ -17,7 +17,9 @@ const config = {
         "kbws13@163.com",
         "hsy449835@gmail.com",
         "hsy040506@163.com"
-    ]
+    ],
+    defaultResLimit: 20,
+    defaultResOffset: 0,
 }
 
 export default config;

@@ -60,7 +60,7 @@ app.use(limiter);
     await connectToDatabase();
     app.use('/api/v1', v1Routes);
 
-    app.listen(3000, () => {
+    app.listen(config.PORT, () => {
       logger.info(`Server running: http://localhost:${config.PORT}`);
     });
   } catch (error) {
