@@ -2,12 +2,12 @@ import login from '@/controllers/v1/auth/login';
 import logout from '@/controllers/v1/auth/logout';
 import refreshToken from '@/controllers/v1/auth/refresh_token';
 import register from '@/controllers/v1/auth/register';
+import authenticate from '@/middlewares/authenticate';
 import validationError from '@/middlewares/validationError';
 import User from '@/modules/user';
 import bcrypt from 'bcrypt';
 import { Router } from 'express';
 import { body, cookie } from 'express-validator';
-import authenticate from '@/middlewares/authenticate';
 
 const router = Router();
 
