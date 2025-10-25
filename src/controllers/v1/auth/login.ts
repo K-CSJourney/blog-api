@@ -25,7 +25,7 @@ const login = async (req: Request, res: Response): Promise<void> => {
     }
 
     // 生成 access token 和 refresh token 给新用户
-    const sccessToken = generateAccessToken(user._id);
+    const successToken = generateAccessToken(user._id);
     const refreshToken = generateRefreshToken(user._id);
 
     // 保存 refreshToken 到数据库
@@ -47,7 +47,7 @@ const login = async (req: Request, res: Response): Promise<void> => {
         email: user.email,
         role: user.role,
       },
-      sccessToken,
+      successToken,
     });
     logger.info('User login successfully', user);
   } catch (error) {
