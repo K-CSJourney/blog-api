@@ -8,7 +8,7 @@ import helmet from 'helmet';
 import limiter from '@/lib/express_limit_rate';
 import v1Routes from '@/routes/v1';
 import { connectToDatabase, disconnectFromDatabase } from '@/lib/mongoose';
-import { logger } from '@/lib/winston';
+import { logger, logtail } from '@/lib/winston';
 
 const app = express();
 
@@ -81,6 +81,8 @@ const handleServerShutdown = async () => {
   try {
     await disconnectFromDatabase();
     logger.warn('Server SHUTDOWN');
+    // 确保所有日志在退出前被发送
+    await logtail.flush();
     process.exit(0);
   } catch (error) {
     logger.error('Error during server shutdown:', error);

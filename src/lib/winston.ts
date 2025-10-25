@@ -1,10 +1,25 @@
 import winston from 'winston';
 import config from '@/config';
+import { Logtail } from '@logtail/node';
+import { LogtailTransport } from '@logtail/winston';
 
 const { combine, timestamp, json, errors, align, printf, colorize } = winston.format;
 
 // Define transports array
 const transports: winston.transport[] = [];
+
+// 创建 Logtail 实例
+const logtail = new Logtail(config.LOGTAIL_SOURCE_TOKEN, {
+  endpoint: `https://${config.LOGTAIL_INGESTING_HOST}`
+});
+
+if (config.NODE_ENV === 'production') {
+  if(!config.LOGTAIL_SOURCE_TOKEN || !config.LOGTAIL_INGESTING_HOST) {
+    throw new Error('Logtail source token and ingesting host must be provided in the configuration');
+  }
+
+  transports.push(new LogtailTransport(logtail));
+}
 
 // 如果应用不是在生产环境运行，添加日志转化
 if (config.NODE_ENV !== 'production') {
@@ -32,4 +47,4 @@ const logger = winston.createLogger({
   silent: config.NODE_ENV === 'test', // 在测试环境中禁用日志
 });
 
-export { logger };
+export { logger, logtail };
