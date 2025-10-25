@@ -1,5 +1,5 @@
 import { logger } from '@/lib/winston';
-import User from '@/modules/user';
+import User from '@/models/user';
 import type { Request, Response } from 'express';
 
 const updateCurrentUser = async (req: Request, res: Response): Promise<void> => {

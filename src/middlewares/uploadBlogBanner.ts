@@ -1,5 +1,5 @@
 import { logger } from '@/lib/winston';
-import Blog from '@/modules/blog';
+import Blog from '@/models/blog';
 import { Request, Response, NextFunction } from 'express';
 import uploadToCloudinary from '@/lib/cloudinary';
 import type { UploadApiErrorResponse } from 'cloudinary';

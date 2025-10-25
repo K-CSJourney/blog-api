@@ -1,7 +1,7 @@
 import { logger } from '@/lib/winston';
-import type { IBlog } from '@/modules/blog';
-import Blog from '@/modules/blog';
-import User from '@/modules/user';
+import type { IBlog } from '@/models/blog';
+import Blog from '@/models/blog';
+import User from '@/models/user';
 import DOMPurify from 'dompurify';
 import { Request, Response } from 'express';
 import { JSDOM } from 'jsdom';

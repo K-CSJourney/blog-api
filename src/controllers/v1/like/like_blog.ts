@@ -1,7 +1,7 @@
 import { logger } from '@/lib/winston';
-import type { IBlog } from '@/modules/blog';
-import Blog from '@/modules/blog';
-import Like from '@/modules/like';
+import type { IBlog } from '@/models/blog';
+import Blog from '@/models/blog';
+import Like from '@/models/like';
 import { Request, Response } from 'express';
 
 const likeBlog = async (req: Request, res: Response) => {

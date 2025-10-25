@@ -1,6 +1,6 @@
 import { logger } from '@/lib/winston';
 import { Request, Response } from 'express';
-import User from '@/modules/user';
+import User from '@/models/user';
 import config from '@/config';
 
 const getAllUser = async (req: Request, res: Response) => {

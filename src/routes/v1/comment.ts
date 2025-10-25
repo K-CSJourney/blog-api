@@ -1,5 +1,6 @@
-import likeBlog from '@/controllers/v1/like/like_blog';
-import unlikeBlog from '@/controllers/v1/like/unlike_blog';
+import commentBlog from '@/controllers/v1/comment/comment_blog';
+import getCommentByBlog from '@/controllers/v1/comment/get_comment_by_blog';
+import deleteComment from '@/controllers/v1/comment/delete_comment';
 import authenticate from '@/middlewares/authenticate';
 import authorize from '@/middlewares/authorize';
 import validationError from '@/middlewares/validationError';
@@ -13,27 +14,27 @@ router.post(
   authenticate,
   authorize(['user', 'admin']),
   param('blogId').isMongoId().withMessage('Invalid blog ID'),
-  body('userId')
-    .notEmpty()
-    .withMessage('User id is required')
-    .isMongoId()
-    .withMessage('Invalid user ID'),
+  body('content').trim().notEmpty().withMessage('Content is required'),
   validationError,
-  likeBlog,
+  commentBlog,
 );
 
-router.delete(
+router.get(
   '/blog/:blogId',
   authenticate,
   authorize(['user', 'admin']),
   param('blogId').isMongoId().withMessage('Invalid blog ID'),
-  body('userId')
-    .notEmpty()
-    .withMessage('User id is required')
-    .isMongoId()
-    .withMessage('Invalid user ID'),
   validationError,
-  unlikeBlog,
+  getCommentByBlog,
+);
+
+router.delete(
+  '/:commentId',
+  authenticate,
+  authorize(['user', 'admin']),
+  param('commentId').isMongoId().withMessage('Invalid comment ID'),
+  validationError,
+  deleteComment,
 );
 
 export default router;

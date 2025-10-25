@@ -1,6 +1,6 @@
 import { logger } from '@/lib/winston';
-import Blog from '@/modules/blog';
-import User from '@/modules/user';
+import Blog from '@/models/blog';
+import User from '@/models/user';
 import { v2 as cloudinary } from 'cloudinary';
 import { Request, Response } from 'express';
 

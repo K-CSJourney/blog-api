@@ -1,9 +1,9 @@
 import config from '@/config';
 import { generateAccessToken, generateRefreshToken } from '@/lib/jwt';
 import { logger } from '@/lib/winston';
-import Token from '@/modules/token';
-import type { IUser } from '@/modules/user';
-import User from '@/modules/user';
+import Token from '@/models/token';
+import type { IUser } from '@/models/user';
+import User from '@/models/user';
 import type { Request, Response } from 'express';
 
 type UserData = Pick<IUser, 'email' | 'password'>;

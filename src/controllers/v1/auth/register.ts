@@ -1,8 +1,8 @@
 import config from '@/config';
 import { generateAccessToken, generateRefreshToken } from '@/lib/jwt';
 import { logger } from '@/lib/winston';
-import Token from '@/modules/token';
-import User, { IUser } from '@/modules/user';
+import Token from '@/models/token';
+import User, { IUser } from '@/models/user';
 import { genUsername } from '@/utils';
 import type { Request, Response } from 'express';
 

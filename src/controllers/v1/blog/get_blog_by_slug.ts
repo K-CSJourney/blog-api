@@ -1,7 +1,7 @@
 import config from '@/config';
 import { logger } from '@/lib/winston';
-import Blog from '@/modules/blog';
-import User from '@/modules/user';
+import Blog from '@/models/blog';
+import User from '@/models/user';
 import { Request, Response } from 'express';
 
 const getBlogBySlug = async (req: Request, res: Response) => {

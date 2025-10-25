@@ -7,7 +7,7 @@ import updateCurrentUser from '@/controllers/v1/user/update_current_user';
 import authenticate from '@/middlewares/authenticate';
 import authorize from '@/middlewares/authorize';
 import validationError from '@/middlewares/validationError';
-import User from '@/modules/user';
+import User from '@/models/user';
 import { Router } from 'express';
 import { body, param, query } from 'express-validator';
 

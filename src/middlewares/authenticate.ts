@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from 'express';
-import Token from '@/modules/token';
+import Token from '@/models/token';
 import { logger } from '@/lib/winston';
 import { verifyAccessToken } from '@/lib/jwt';
 import type { Types } from 'mongoose';
