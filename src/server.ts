@@ -25,6 +25,7 @@ const corsOptions: CorsOptions = {
       logger.warn(`CORS Error: ${origin} is not allowed by CORS`);
     }
   },
+  credentials: true,
 };
 // 添加 CORS 中间件
 app.use(cors(corsOptions));
