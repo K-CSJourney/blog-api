@@ -1,34 +1,21 @@
 import config from '@/config';
 import { logger } from '@/lib/winston';
-import Blog from '@/models/blog';
-import User from '@/models/user';
+import Comment from '@/models/comment';
 import { Request, Response } from 'express';
 
-interface QueryType {
-    status?: 'draft' | 'published';
-}
-
-const getAllBlog = async (req: Request, res: Response) => {
+const getAllComments = async (req: Request, res: Response) => {
   try {
-    const userId = req.userId;
     const limit = parseInt(req.query.limit as string) || config.defaultResLimit;
     let offset = parseInt(req.query.offset as string) || config.defaultResOffset;
-    const user = await User.findById(userId).select('role').lean().exec();
-    const query: QueryType = {};
 
-    if(user?.role === 'user') {
-        query.status = 'published';
-    }
-
-    const total = await Blog.countDocuments(query);
+    const total = await Comment.countDocuments();
 
     if (offset >= total) {
       offset = 0;
     }
 
-    const blogs = await Blog.find(query)
-      .select('-banner_image -__v')
-      .populate('author', '-createdAt -updatedAt -__v')
+    const comments = await Comment.find()
+      .select('-__v')
       .limit(limit)
       .skip(offset)
       .sort({ createdAt: -1 })
@@ -39,7 +26,7 @@ const getAllBlog = async (req: Request, res: Response) => {
       limit,
       offset,
       total,
-      blogs,
+      comments,
     });
   } catch (error) {
     res.status(500).json({
@@ -51,4 +38,4 @@ const getAllBlog = async (req: Request, res: Response) => {
   }
 };
 
-export default getAllBlog;
+export default getAllComments;

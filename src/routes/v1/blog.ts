@@ -21,7 +21,12 @@ router.post(
   authenticate,
   authorize(['admin']),
   upload.single('banner_image'),
-  body('banner_iamge').notEmpty().withMessage('Banner image is required'),
+  body('banner_image').custom((value, { req }) => {
+    if (!req.file) {
+      throw new Error('Banner image is required');
+    }
+    return true;
+  }),
   body('title')
     .trim()
     .notEmpty()
@@ -40,8 +45,6 @@ router.post(
 
 router.get(
   '/',
-  authenticate,
-  authorize(['admin', 'user']),
   query('limit')
     .optional()
     .isInt({ min: 1, max: 50 })
@@ -73,8 +76,8 @@ router.get(
 
 router.get(
   '/:slug',
-  authenticate,
-  authorize(['admin', 'user']),
+  // authenticate,
+  // authorize(['admin', 'user']),
   param('slug').notEmpty().withMessage('Slug is required.'),
   validationError,
   getBlogBySlug,
