@@ -59,7 +59,7 @@ app.use(limiter);
 (async () => {
   try {
     await connectToDatabase();
-    app.use('/api/v1', v1Routes);
+    app.use('/v1', v1Routes);
 
     app.listen(config.PORT, () => {
       logger.info(`Server running: http://localhost:${config.PORT}`);
